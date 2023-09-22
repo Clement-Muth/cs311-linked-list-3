@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.h": "c",
+    "*.tsx": "typescriptreact",
+    "__bit_reference": "cpp",
+    "bitset": "cpp",
+    "unordered_map": "cpp",
+    "string": "cpp"
+  }
+}
