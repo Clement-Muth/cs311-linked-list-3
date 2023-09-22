@@ -8,17 +8,6 @@
 #include <string>
 using namespace std;
 
-// #define IS_OPERATOR_CHAR(c) c == '+' || c == '-' || c == '*' || c == '/'
-// #define is_division_by_zero(x) x == 0
-// #define is_add_sub(c) c == '+' || c == '-'
-// #define is_div_mult(c) c == '*' || c == '/'
-// #define add_operator_w_space(op) string(1, op) + ' '
-
-// #define TOO_FEW_OPERATOR false
-// #define DIVISION_BY_0 false
-// #define UNKNOWN_CHAR false
-// #define UNVALID_POSTFIX_EXPR false
-
 /**
  * @brief Evaluate a postfix expression
  * @param postfix_expr The input expression in the postfix format.

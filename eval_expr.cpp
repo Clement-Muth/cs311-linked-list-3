@@ -6,6 +6,7 @@
 // You should always comments to each function to describe its PURPOSE and PARAMETERS
 #include <stdbool.h>
 #include <string>
+#include "calculator.hpp"
 #include "stack.h"
 #include "eval_expr.h"
 
@@ -21,30 +22,14 @@
     #define DIVISION_BY_0 false
     #define UNKNOWN_CHAR false
     #define UNVALID_POSTFIX_EXPR false
-
 #endif //TEST_DEFINE_DEBUG
 
-static float processOperation(char const c, float const operand1, float const operand2) {
-    float result = 0;
+float (*Calculator::operations[256])(float, float) = {0};
 
-    switch (c) {
-        case '+':
-            result = operand1 + operand2;
-            break;
-        case '-':
-            result = operand1 - operand2;
-            break;
-        case '*':
-            result = operand1 * operand2;
-            break;
-        case '/':
-            if (is_division_by_zero(operand2)) return -1;
-            result = operand1 / operand2;
-            break;
-        default:
-            break;
-    }
-    return result;
+float processOperation(char const c, float const operand1, float const operand2) {
+    Calculator::initializeOperations();
+
+    return Calculator::operations[c](operand1, operand2);
 }
 
 /**
