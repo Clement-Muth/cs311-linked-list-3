@@ -40,6 +40,7 @@ static float processOperation(char const c, float const operand1, float const op
         case '/':
             if (is_division_by_zero(operand2)) return -1;
             result = operand1 / operand2;
+            break;
         default:
             break;
     }
