@@ -9,6 +9,21 @@
 #include "stack.h"
 #include "eval_expr.h"
 
+#ifndef TEST_DEFINE_DEBUG
+#define TEST_DEFINE_DEBUG
+    #define IS_OPERATOR_CHAR(c) c == '+' || c == '-' || c == '*' || c == '/'
+    #define is_division_by_zero(x) x == 0
+    #define is_add_sub(c) c == '+' || c == '-'
+    #define is_div_mult(c) c == '*' || c == '/'
+    #define add_operator_w_space(op) string(1, op) + ' '
+
+    #define TOO_FEW_OPERATOR false
+    #define DIVISION_BY_0 false
+    #define UNKNOWN_CHAR false
+    #define UNVALID_POSTFIX_EXPR false
+
+#endif //TEST_DEFINE_DEBUG
+
 static float processOperation(char const c, float const operand1, float const operand2) {
     float result = 0;
 
