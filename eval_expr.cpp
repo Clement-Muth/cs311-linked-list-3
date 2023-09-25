@@ -9,10 +9,10 @@
 #include "stack.h"
 #include "eval_expr.h"
 
+// NOTE - This is here because I got the error "‘Calculator’ has not been declared" in Gradescope...
 #ifndef TEST_DEFINE_DEBUG
 #define TEST_DEFINE_DEBUG
     #define IS_OPERATOR_CHAR(c) c == '+' || c == '-' || c == '*' || c == '/'
-    #define is_division_by_zero(x) x == 0
     #define is_add_sub(c) c == '+' || c == '-'
     #define is_div_mult(c) c == '*' || c == '/'
     #define add_operator_w_space(op) string(1, op) + ' '
@@ -21,6 +21,40 @@
     #define DIVISION_BY_0 false
     #define UNKNOWN_CHAR false
     #define UNVALID_POSTFIX_EXPR false
+
+    class Calculator {
+        public:
+            static float add(float a, float b) {
+                return a + b;
+            }
+
+            static float subtract(float a, float b) {
+                return a - b;
+            }
+
+            static float multiply(float a, float b) {
+                return a * b;
+            }
+
+            static float divide(float a, float b) {
+                return is_division_by_zero(b) ? -1 : a / b;
+            }
+
+            static void initializeOperations() {
+                operations['+'] = add;
+                operations['-'] = subtract;
+                operations['*'] = multiply;
+                operations['/'] = divide;
+            }
+
+            static float (*operations[256])(float, float);
+
+        private:
+            static bool is_division_by_zero(float b) {
+                return b == 0;
+            }
+    };
+    
 #endif //TEST_DEFINE_DEBUG
 
 float (*Calculator::operations[256])(float, float) = {0};
@@ -48,13 +82,13 @@ bool evalPostfixExpr(string postfix_expr, float &result)
             if (operandStack.size() < 2) return TOO_FEW_OPERATOR;
             float operand2 = 0;
             float operand1 = 0;
-            float result = 0;
+            float res = 0;
 
             operandStack.pop(operand2);
             operandStack.pop(operand1);
-            result = round(processOperation(c, operand1, operand2) * 10) / 10;
-            if (result == -1) return DIVISION_BY_0;
-            operandStack.push(result);
+            res = processOperation(c, operand1, operand2);
+            if (res == -1) return DIVISION_BY_0;
+            operandStack.push(res);
         }
         else return UNKNOWN_CHAR;
     }
