@@ -6,7 +6,6 @@
 // You should always comments to each function to describe its PURPOSE and PARAMETERS
 #include <stdbool.h>
 #include <string>
-#include "calculator.hpp"
 #include "stack.h"
 #include "eval_expr.h"
 
@@ -53,7 +52,7 @@ bool evalPostfixExpr(string postfix_expr, float &result)
 
             operandStack.pop(operand2);
             operandStack.pop(operand1);
-            result = processOperation(c, operand1, operand2);
+            result = round(processOperation(c, operand1, operand2) * 10) / 10;
             if (result == -1) return DIVISION_BY_0;
             operandStack.push(result);
         }
