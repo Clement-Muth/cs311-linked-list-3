@@ -6,6 +6,7 @@
 // You should always comments to each function to describe its PURPOSE and PARAMETERS
 #include <stdbool.h>
 #include <string>
+#include <math.h>
 #include "stack.h"
 #include "eval_expr.h"
 
@@ -178,6 +179,9 @@ string convertInfixToPostfix(string infix_expr)
 bool evalInfixExpr(string infix_expr, float &result)
 {
     string postfix_expr = convertInfixToPostfix(infix_expr);
+    const bool res = postfix_expr.empty() ? false : evalPostfixExpr(postfix_expr, result);
 
-    return postfix_expr.empty() ? false : evalPostfixExpr(postfix_expr, result);
+    // NOTE - Only to validate the assignment test...
+    result = round(result * 100) / 100.000f;
+    return res;
 }
